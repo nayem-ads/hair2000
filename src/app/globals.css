@@ -1,0 +1,192 @@
+@import "tailwindcss";
+
+/* ─── Design Tokens ─────────────────────────────────────────────────────────── */
+:root {
+  /* Blue Brand */
+  --blue-600: #2563EB;
+  --blue-700: #1D4ED8;
+  --blue-800: #1E40AF;
+  --blue-50:  #EFF6FF;
+  --blue-100: #DBEAFE;
+  --blue-200: #BFDBFE;
+
+  /* Neutral/Slate Palette */
+  --navy:         #0F172A;
+  --slate-800:    #1E293B;
+  --slate-700:    #334155;
+  --slate-600:    #475569;
+  --slate-500:    #64748B;
+  --slate-400:    #94A3B8;
+  --slate-300:    #CBD5E1;
+  --slate-200:    #E2E8F0;
+  --slate-100:    #F1F5F9;
+  --slate-50:     #F8FAFF;
+  --white:        #FFFFFF;
+
+  /* Page Setup */
+  --bg:           #F8FAFF;
+  --surface:      #FFFFFF;
+  --border:       #E2E8F0;
+}
+
+/* ─── Base Styles ────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
+  background: var(--bg);
+  color: var(--navy);
+  overflow-x: hidden;
+}
+
+/* ─── Typography ─────────────────────────────────────────────────────────────── */
+.font-display {
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
+}
+.font-body {
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
+}
+
+/* ─── Premium Blue Button ────────────────────────────────────────────────────── */
+.btn-blue {
+  background: var(--blue-600);
+  color: #ffffff;
+  font-family: var(--font-poppins), sans-serif;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  letter-spacing: 0.01em;
+  padding: 0.875rem 2rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
+}
+.btn-blue:hover {
+  background: var(--blue-700);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+}
+.btn-blue:active {
+  transform: translateY(0);
+}
+
+/* ─── Outline Blue Button ────────────────────────────────────────────────────── */
+.btn-outline-blue {
+  background: transparent;
+  color: var(--blue-600);
+  font-family: var(--font-poppins), sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 12px;
+  border: 1.5px solid var(--blue-200);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+.btn-outline-blue:hover {
+  background: var(--blue-50);
+  border-color: var(--blue-600);
+}
+.btn-outline-blue:active {
+  transform: translateY(0);
+}
+
+/* ─── Minimal Inputs ─────────────────────────────────────────────────────────── */
+.input-clean {
+  background: var(--white);
+  border: 1.5px solid var(--slate-200);
+  border-radius: 12px;
+  color: var(--navy);
+  font-family: var(--font-poppins), sans-serif;
+  font-size: 0.9375rem;
+  padding: 0.875rem 1.25rem;
+  width: 100%;
+  transition: all 0.2s ease;
+  outline: none;
+}
+.input-clean::placeholder {
+  color: var(--slate-400);
+}
+.input-clean:focus {
+  border-color: var(--blue-600);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+.input-clean option {
+  background: var(--white);
+  color: var(--navy);
+}
+
+/* ─── Minimal Premium Card ───────────────────────────────────────────────────── */
+.card-clean {
+  background: var(--white);
+  border: 1.5px solid var(--slate-200);
+  border-radius: 20px;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.card-clean:hover {
+  border-color: var(--blue-200);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+}
+.card-clean-selected {
+  border-color: var(--blue-600) !important;
+  background: var(--blue-50) !important;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.08) !important;
+}
+
+/* ─── Animations ─────────────────────────────────────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+.float-slow   { animation: float 5s ease-in-out infinite; }
+.float-medium { animation: float 3.5s ease-in-out infinite; }
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0.03) 0%,
+    rgba(37,99,235,0.06) 50%,
+    rgba(255,255,255,0.03) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes rotate-ring  { to { transform: rotate( 360deg); } }
+@keyframes counter-rotate { to { transform: rotate(-360deg); } }
+.rotate-ring    { animation: rotate-ring   2s linear infinite; }
+.counter-rotate { animation: counter-rotate 3s linear infinite; }
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: var(--slate-100); }
+::-webkit-scrollbar-thumb { background: var(--blue-200); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--blue-600); }
+
+/* ─── Mobile Helpers ─────────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .btn-blue, .btn-outline-blue {
+    width: 100%;
+    justify-content: center;
+  }
+}

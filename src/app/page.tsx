@@ -116,6 +116,10 @@ export default function Home() {
       if (json.success && json.results.length > 0) {
         setResults(json.results);
         if (json.faceAnalysis) {
+          if (json.debugError) {
+            console.warn('⚠️ OpenAI Generation Error:', json.debugError);
+            json.faceAnalysis.advice = `${json.faceAnalysis.advice || ''} (API Error: ${json.debugError})`;
+          }
           setFaceAnalysis(json.faceAnalysis); // Updates with advice text
         }
         setStep('result');

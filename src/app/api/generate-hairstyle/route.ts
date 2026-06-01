@@ -38,7 +38,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<GenerateR
     saveLead(leadData).catch((err) => console.error('Lead save failed:', err));
 
     // 2. Generate hairstyle previews
-    const { results, faceAnalysis: finalAnalysis } = await generateHairstyle(
+    const { results, faceAnalysis: finalAnalysis, debugError } = await generateHairstyle(
       imageBase64,
       maskBase64,
       styleGoal,
@@ -51,7 +51,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<GenerateR
       (err) => console.error('Follow-up notification failed:', err),
     );
 
-    return NextResponse.json({ success: true, results, faceAnalysis: finalAnalysis });
+    return NextResponse.json({ success: true, results, faceAnalysis: finalAnalysis, debugError });
   } catch (error) {
     console.error('Generate hairstyle error:', error);
     return NextResponse.json(

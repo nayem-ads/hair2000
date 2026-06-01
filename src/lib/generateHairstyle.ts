@@ -208,7 +208,7 @@ export async function generateHairstyle(
   styleGoal: StyleGoal,
   leadData: LeadData,
   clientFaceAnalysis?: FaceAnalysis
-): Promise<{ results: HairstyleResult[]; faceAnalysis: FaceAnalysis }> {
+): Promise<{ results: HairstyleResult[]; faceAnalysis: FaceAnalysis; debugError?: string }> {
   const apiKey = process.env.OPENAI_API_KEY;
 
   // 1. Get face analysis
@@ -292,7 +292,12 @@ export async function generateHairstyle(
       size: '1024x1024',
     });
 
-    const imageUrls = (dalleResponse.data || []).map(img => img.url).filter(Boolean) as string[];
+    const imageUrls = (dalleResponse.data || []).map(img => {
+      if (img.b64_json) {
+        return `data:image/png;base64,${img.b64_json}`;
+      }
+      return img.url;
+    }).filter(Boolean) as string[];
 
     if (imageUrls.length === 0) {
       throw new Error('No image URLs returned from DALL-E');
@@ -360,6 +365,11 @@ Respond ONLY with a valid JSON object matching this structure (no code fences, n
 
   } catch (err) {
     console.error('⚠️ Live OpenAI Hairstyle generation crashed, fallback used:', err);
-    return runFallbackCatalog();
+    const fallback = runFallbackCatalog();
+    return {
+      results: fallback.results,
+      faceAnalysis: fallback.faceAnalysis,
+      debugError: err instanceof Error ? err.message : String(err)
+    };
   }
 }

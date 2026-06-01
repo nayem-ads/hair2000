@@ -7,7 +7,7 @@ import {
   useTransform,
 } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
-import { ArrowRight, ShieldCheck, Clock, Sparkles, Zap, Lock } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Clock, Sparkles, Zap, Lock, Phone } from 'lucide-react';
 
 /* ─── Framer variants ────────────────────────────────────────────────────── */
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1, delayChildren: 0.08 } } };
@@ -70,7 +70,7 @@ export function HeroSection({ onStart }: { onStart: () => void }) {
       <motion.nav initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         style={{ position: 'relative', zIndex: 20, display: 'flex', alignItems: 'center',
-          justifyContent: 'space-between', padding: '20px 48px', maxWidth: 1100, margin: '0 auto', width: '100%' }}>
+          justifyContent: 'space-between', padding: '20px 24px', maxWidth: 1100, margin: '0 auto', width: '100%' }}>
         {/* Logo */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <div style={{ width: 36, height: 36, borderRadius: 10, display: 'flex', alignItems: 'center',
@@ -81,15 +81,31 @@ export function HeroSection({ onStart }: { onStart: () => void }) {
           </span>
         </div>
         {/* Right */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
-          <a href="#how-it-works" style={{ fontSize: 14, fontWeight: 500, color: '#64748B', textDecoration: 'none' }}>
-            How it works
-          </a>
-          <motion.button id="nav-try-btn" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} onClick={onStart}
-            style={{ fontSize: 13, fontWeight: 700, padding: '8px 18px', borderRadius: 10, cursor: 'pointer',
-              background: '#EFF6FF', color: '#2563EB', border: '1.5px solid #BFDBFE' }}>
-            Try Free →
-          </motion.button>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <motion.a 
+            href="tel:+14154534945" 
+            id="nav-call-btn" 
+            whileHover={{ scale: 1.04 }} 
+            whileTap={{ scale: 0.97 }}
+            style={{ 
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              fontSize: '13px', 
+              fontWeight: 700, 
+              padding: '8px 16px', 
+              borderRadius: '10px', 
+              cursor: 'pointer',
+              background: '#EFF6FF', 
+              color: '#2563EB', 
+              border: '1.5px solid #BFDBFE',
+              textDecoration: 'none'
+            }}
+          >
+            <Phone size={13} style={{ color: '#2563EB' }} fill="#2563EB" />
+            <span className="hidden sm:inline">Call Now: +1 (415) 453-4945</span>
+            <span className="inline sm:hidden">Call Now</span>
+          </motion.a>
         </div>
       </motion.nav>
 

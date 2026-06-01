@@ -93,6 +93,14 @@ export default function Home() {
   const handleLeadSubmit = async (data: LeadData) => {
     if (!selectedStyle) return;
 
+    // Block if user has reached the 3-try limit
+    const triesStr = typeof window !== 'undefined' ? localStorage.getItem('hair2000_tries') : null;
+    const triesCount = triesStr ? parseInt(triesStr, 10) : 0;
+    if (triesCount >= 3) {
+      alert('🔒 You have reached the limit of 3 free AI hair previews. Please call us to book a consultation and explore more styles!');
+      return;
+    }
+
     const enrichedLead = { ...data, styleGoal: selectedStyle.label };
     setLeadData(enrichedLead);
     setIsGenerating(true);
@@ -114,6 +122,13 @@ export default function Home() {
       const json = await response.json();
 
       if (json.success && json.results.length > 0) {
+        // Increment tries count on successful generation
+        if (typeof window !== 'undefined') {
+          const currentTries = localStorage.getItem('hair2000_tries');
+          const nextCount = (currentTries ? parseInt(currentTries, 10) : 0) + 1;
+          localStorage.setItem('hair2000_tries', String(nextCount));
+        }
+
         setResults(json.results);
         if (json.faceAnalysis) {
           if (json.debugError) {

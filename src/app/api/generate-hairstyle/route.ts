@@ -34,17 +34,27 @@ export async function POST(request: NextRequest): Promise<NextResponse<GenerateR
       );
     }
 
-    // 1. Save lead to CRM (runs in background, non-blocking)
-    saveLead(leadData).catch((err) => console.error('Lead save failed:', err));
+    // 1. Save lead to CRM (runs in parallel with image generation to optimize response time)
+    const leadSavePromise = saveLead(leadData).catch((err) => 
+      console.error('Lead save failed:', err)
+    );
 
     // 2. Generate hairstyle previews
-    const { results, faceAnalysis: finalAnalysis, debugError } = await generateHairstyle(
+    const generationPromise = generateHairstyle(
       imageBase64,
       maskBase64,
       styleGoal,
       leadData,
       body.faceAnalysis
     );
+
+    // Wait for both to finish (safeguard against early container shutdown)
+    const [_, genResult] = await Promise.all([
+      leadSavePromise,
+      generationPromise
+    ]);
+
+    const { results, faceAnalysis: finalAnalysis, debugError } = genResult;
 
     // 3. Send follow-up notification (runs in background)
     sendFollowUpNotification(leadData.name, leadData.phone, leadData.email).catch(

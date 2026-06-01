@@ -273,11 +273,11 @@ export async function generateHairstyle(
     const maskFile = await toFile(maskBuffer, 'mask.png', { type: 'image/png' });
 
     // Step 2: Build prompt
-    let chosenPrompt = `change only the hair to a ${styleGoal.label} hairstyle, professional premium salon cut & blow-dry styling, highly detailed hair strands, matching lighting, natural hair flow`;
+    let chosenPrompt = `change only the hair to a ${styleGoal.label} hairstyle. Keep the face, face shape, facial features, eyes, and identity 100% identical to the original image; do not alter the face at all. Professional premium salon cut & blow-dry styling, highly detailed hair strands, matching lighting, natural hair flow.`;
     
     if (styleGoal.label === 'Surprise Me') {
       const serviceWord = leadData.preferredService === 'Hair Color' ? 'beautiful color refresh / balayage' : 'trendy stylish haircut';
-      chosenPrompt = `change only the hair to a trend-setting, modern ${serviceWord} customized for an ${faceAnalysis.faceShape} face shape with ${faceAnalysis.hairColor} base, high-end professional styling, natural textures`;
+      chosenPrompt = `change only the hair to a trend-setting, modern ${serviceWord} customized for an ${faceAnalysis.faceShape} face shape with ${faceAnalysis.hairColor} base. Keep the face, face shape, facial features, eyes, and identity 100% identical to the original image; do not alter the face at all. High-end professional styling, natural textures.`;
     }
 
     console.log(`🎨 Requesting 3 edits from gpt-image-2 in one call... Prompt: "${chosenPrompt}"`);

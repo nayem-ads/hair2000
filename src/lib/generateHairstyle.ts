@@ -272,12 +272,12 @@ export async function generateHairstyle(
     const maskBuffer = Buffer.from(maskBase64Clean, 'base64');
     const maskFile = await toFile(maskBuffer, 'mask.png', { type: 'image/png' });
 
-    // Step 2: Build prompt
-    let chosenPrompt = `change only the hair to a ${styleGoal.label} hairstyle. Keep the face, face shape, facial features, eyes, and identity 100% identical to the original image; do not alter the face at all. Professional premium salon cut & blow-dry styling, highly detailed hair strands, matching lighting, natural hair flow.`;
+    // Step 2: Build prompt with high context and strict instructions
+    let chosenPrompt = `Inpaint and modify only the hair of the person to a ${styleGoal.label} hairstyle, matching the color and style precisely. Do not alter, edit, or touch the face, face shape, skin, eyes, nose, eyebrows, lips, expression, clothing, or background. Keep the person's face and identity 100% identical and unchanged. The new hair should look extremely realistic, with highly detailed hair strands, natural flow, premium salon cut, and professional blow-dry styling, seamlessly blending at the original hairline.`;
     
     if (styleGoal.label === 'Surprise Me') {
       const serviceWord = leadData.preferredService === 'Hair Color' ? 'beautiful color refresh / balayage' : 'trendy stylish haircut';
-      chosenPrompt = `change only the hair to a trend-setting, modern ${serviceWord} customized for an ${faceAnalysis.faceShape} face shape with ${faceAnalysis.hairColor} base. Keep the face, face shape, facial features, eyes, and identity 100% identical to the original image; do not alter the face at all. High-end professional styling, natural textures.`;
+      chosenPrompt = `Inpaint and modify only the hair of the person to a trend-setting, modern ${serviceWord} customized for an ${faceAnalysis.faceShape} face shape with ${faceAnalysis.hairColor} base. Do not alter, edit, or touch the face, face shape, skin, eyes, nose, eyebrows, lips, expression, clothing, or background. Keep the person's face and identity 100% identical and unchanged. High-end professional salon styling, natural hair textures, and detailed strands, blending seamlessly at the original hairline.`;
     }
 
     console.log(`🎨 Requesting 3 edits from gpt-image-2 in one call... Prompt: "${chosenPrompt}"`);

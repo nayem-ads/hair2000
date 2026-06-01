@@ -21,7 +21,7 @@ Hi ${name},
 
 Your personalized AI hairstyle preview is ready!
 
-We've created 5 custom looks based on your face shape and style preferences. A professional stylist can help bring any of these looks to life — adjusted perfectly for your real hair texture, thickness, and color goals.
+We've created 3 custom looks based on your face shape and style preferences. A professional stylist can help bring any of these looks to life — adjusted perfectly for your real hair texture, thickness, and color goals.
 
 ${previewUrl ? `View your preview: ${previewUrl}` : ''}
 

@@ -147,7 +147,7 @@ export function HeroSection({ onStart }: { onStart: () => void }) {
         <motion.p variants={fadeUp}
           style={{ fontSize: 17, fontWeight: 500, color: '#64748B', marginBottom: 32,
             lineHeight: 1.6, maxWidth: 440 }}>
-          Upload a selfie · Get 5 AI hairstyle previews · Book what you love with total confidence
+          Upload a selfie · Get 3 AI hairstyle previews · Book what you love with total confidence
         </motion.p>
 
         {/* CTA */}
@@ -179,7 +179,7 @@ export function HeroSection({ onStart }: { onStart: () => void }) {
           justifyContent: 'center', marginBottom: 48 }}>
           {[
             { Icon: Lock,        t: 'Private & Secure' },
-            { Icon: Sparkles,    t: '5 AI Looks'       },
+            { Icon: Sparkles,    t: '3 AI Looks'       },
             { Icon: Clock,       t: '~60 Seconds'      },
             { Icon: ShieldCheck, t: 'No Commitment'    },
           ].map(({ Icon, t }, i) => (

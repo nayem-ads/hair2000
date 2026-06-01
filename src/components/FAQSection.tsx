@@ -14,7 +14,7 @@ const FAQS = [
   { id: 'stylist',     q: 'Can a stylist help me pick the right look?',
     a: 'Yes — bring your AI preview to your appointment and your stylist will use it as a starting point for a personalized consultation.' },
   { id: 'how',         q: 'How does the AI preview work?',
-    a: 'You upload a selfie, pick a style goal, and our AI analyzes your face shape, hair texture, and tone to generate 5 personalized hairstyle previews.' },
+    a: 'You upload a selfie, pick a style goal, and our AI analyzes your face shape, hair texture, and tone to generate 3 personalized hairstyle previews.' },
   { id: 'cost',        q: 'How much does it cost?',
     a: 'The AI hair preview is 100% free. No credit card, no signup — just your photo and style goal.' },
 ];

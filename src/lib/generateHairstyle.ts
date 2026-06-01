@@ -280,16 +280,16 @@ export async function generateHairstyle(
       chosenPrompt = `change only the hair to a trend-setting, modern ${serviceWord} customized for an ${faceAnalysis.faceShape} face shape with ${faceAnalysis.hairColor} base, high-end professional styling, natural textures`;
     }
 
-    console.log(`🎨 Requesting 3 edits from dall-e-2 in one call... Prompt: "${chosenPrompt}"`);
+    console.log(`🎨 Requesting 3 edits from gpt-image-2 in one call... Prompt: "${chosenPrompt}"`);
 
-    // Step 3: Run DALL-E 2 Inpainting (3 variations in a single call)
+    // Step 3: Run GPT-Image-2 Inpainting (3 variations in a single call)
     const dalleResponse = await client.images.edit({
-      model: 'dall-e-2',
+      model: 'gpt-image-2',
       image: imageFile,
       mask: maskFile,
       prompt: chosenPrompt,
       n: 3,
-      size: '512x512',
+      size: '1024x1024',
     });
 
     const imageUrls = (dalleResponse.data || []).map(img => img.url).filter(Boolean) as string[];

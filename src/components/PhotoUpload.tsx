@@ -44,8 +44,8 @@ export function PhotoUpload({ onImageSelected, isScanning }: PhotoUploadProps) {
           // 1. Cropped Square Image
           const canvas = document.createElement('canvas');
           const size = Math.min(img.width, img.height);
-          canvas.width = 512;
-          canvas.height = 512;
+          canvas.width = 1024;
+          canvas.height = 1024;
           const ctx = canvas.getContext('2d');
           
           if (ctx) {
@@ -57,23 +57,23 @@ export function PhotoUpload({ onImageSelected, isScanning }: PhotoUploadProps) {
               size,
               0,
               0,
-              512,
-              512
+              1024,
+              1024
             );
             const squareBase64 = canvas.toDataURL('image/png');
             setPreview(squareBase64); // Show the clean square preview
 
             // 2. Hair Mask Image (Top 60% transparent for editing, bottom 40% solid black to preserve face)
             const maskCanvas = document.createElement('canvas');
-            maskCanvas.width = 512;
-            maskCanvas.height = 512;
+            maskCanvas.width = 1024;
+            maskCanvas.height = 1024;
             const mctx = maskCanvas.getContext('2d');
             
             if (mctx) {
               mctx.fillStyle = '#000000'; // Fill solid black first
-              mctx.fillRect(0, 0, 512, 512);
+              mctx.fillRect(0, 0, 1024, 1024);
 
-              mctx.clearRect(0, 0, 512, 307); // Clear top 60% (transparent area)
+              mctx.clearRect(0, 0, 1024, 614); // Clear top 60% (transparent area)
 
               const maskBase64 = maskCanvas.toDataURL('image/png');
 
